@@ -1,8 +1,7 @@
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
 const chatBox = document.getElementById('chat-box');
-const statusBot = document.getElementById('status-bot'); // Ambil elemen status
-
+const statusBot = document.getElementById('status-bot'); 
 let chatHistory = [];
 
 function setStatus(isOnline, message = "Online") {
