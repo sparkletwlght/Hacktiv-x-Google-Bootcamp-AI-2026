@@ -5,7 +5,6 @@ const statusBot = document.getElementById('status-bot'); // Ambil elemen status
 
 let chatHistory = [];
 
-// 1. FUNGSI UPDATE STATUS
 function setStatus(isOnline, message = "Online") {
     if (isOnline) {
         statusBot.textContent = `● ${message}`;
@@ -16,7 +15,6 @@ function setStatus(isOnline, message = "Online") {
     }
 }
 
-// 2. DETEKSI KONEKSI INTERNET USER
 window.addEventListener('online', () => setStatus(true, "Online"));
 window.addEventListener('offline', () => setStatus(false, "Offline"));
 
@@ -34,7 +32,6 @@ chatForm.addEventListener('submit', async (e) => {
     const text = userInput.value.trim();
     if (!text) return;
 
-    // Cek jika user sedang offline sebelum kirim
     if (!navigator.onLine) {
         alert("Kamu sedang offline, periksa koneksi internetmu!");
         return;
@@ -61,14 +58,13 @@ chatForm.addEventListener('submit', async (e) => {
         if (data.result) {
             appendMessage('assistant', data.result);
             chatHistory.push({ role: 'assistant', text: data.result });
-            setStatus(true, "Online"); // Pastikan status online jika berhasil
+            setStatus(true, "Online"); 
         }
     } catch (err) {
         loading.innerText = "Gagal menghubungi Elliot (Server Offline).";
-        setStatus(false, "Server Error"); // Ubah status jadi offline jika server mati
+        setStatus(false, "Server Error"); 
         console.error(err);
     }
 });
 
-// Inisialisasi status saat pertama kali load
 setStatus(navigator.onLine, navigator.onLine ? "Online" : "Offline");
